@@ -1,0 +1,10 @@
+/* Studio9DN — Brand typefaces
+ * Primary:   Clash Grotesk (Indian Type Foundry) — UI, headings, numerals
+ * Secondary: Rowan (Indian Type Foundry) — editorial serif, italic emphasis
+ * Both are open source and served from the Fontshare CDN (fontshare.com).
+ * For a fully self-hosted production build, download from fontshare.com and
+ * replace these @import lines with @font-face rules pointing at local files.
+ */
+
+@import url("https://api.fontshare.com/v2/css?f[]=clash-grotesk@200,300,400,500,600,700&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=rowan@400,500,600,700&display=swap");
