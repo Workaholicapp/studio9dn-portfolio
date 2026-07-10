@@ -1,0 +1,5 @@
+# Project instructions
+
+- **Preserve user-uploaded images.** Every image the user drops into an `<image-slot>` must persist. Keep each slot's `id` STABLE across edits — never rename, remove, or reassign slot ids, and never change a slot's `id` when editing surrounding markup. The image-slot component stores drops in localStorage keyed by that id, so a stable id is what keeps the user's uploaded/updated images from being lost when the design or prompt changes. When adding new image areas, give them new unique ids; do not reuse or reshuffle existing ones.
+- **Newest image wins.** When the user drops a new image onto a slot, that replaces whatever was there before — the previous image is discarded and only the latest is retained. This happens automatically because the slot stores by `id`; keeping ids stable is what makes a re-drop overwrite the old image in place (rather than the old one lingering or the new one being lost). Never restore or re-inject a prior image over a slot the user has updated.
+- Do not clear or overwrite localStorage entries the user created (their dropped images); only the user replacing a drop should change a slot's stored image.

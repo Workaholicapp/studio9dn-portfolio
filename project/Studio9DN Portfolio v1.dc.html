@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/studio9dn-design-system-2-7fd16e1d-3326-4ed8-ae8d-ed947c1dc157/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/studio9dn-design-system-2-7fd16e1d-3326-4ed8-ae8d-ed947c1dc157/tokens/colors.css">
+<link rel="stylesheet" href="_ds/studio9dn-design-system-2-7fd16e1d-3326-4ed8-ae8d-ed947c1dc157/tokens/typography.css">
+<link rel="stylesheet" href="_ds/studio9dn-design-system-2-7fd16e1d-3326-4ed8-ae8d-ed947c1dc157/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/studio9dn-design-system-2-7fd16e1d-3326-4ed8-ae8d-ed947c1dc157/tokens/radius.css">
+<link rel="stylesheet" href="_ds/studio9dn-design-system-2-7fd16e1d-3326-4ed8-ae8d-ed947c1dc157/tokens/base.css">
+<link rel="stylesheet" href="_ds/studio9dn-design-system-2-7fd16e1d-3326-4ed8-ae8d-ed947c1dc157/styles.css">
+<script src="_ds/studio9dn-design-system-2-7fd16e1d-3326-4ed8-ae8d-ed947c1dc157/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; background: var(--color-bg); color: var(--color-text); }
+  @keyframes s9fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .s9view { animation: s9fade 360ms ease-out both; }
+  .s9hatch { position: absolute; inset: 0; opacity: 0.18; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.4) 0 1px, transparent 1px 24px); pointer-events: none; }
+  .s9imlabel { position: absolute; left: 16px; bottom: 14px; font-family: var(--font-display); font-size: var(--text-2xs, 11px); letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.82); z-index: 2; }
+  .s9card:hover .s9zoom { transform: scale(1.03); }
+  .s9zoom { transition: transform 480ms ease-out; will-change: transform; }
+  .s9link { position: relative; cursor: pointer; }
+  .s9link::after { content: ''; position: absolute; left: 0; bottom: -2px; height: 1px; width: 0; background: currentColor; transition: width 240ms ease-out; }
+  .s9link:hover::after { width: 100%; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; display: flex; flex-direction: column; background: var(--color-bg); font-family: var(--font-display);">
+
+  <!-- ===== HEADER ===== -->
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(245,243,236,0.82); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border);">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 0 32px; height: 72px; display: flex; align-items: center; justify-content: space-between;">
+      <button onClick="{{ goHome }}" style="border: none; background: transparent; cursor: pointer; padding: 0; display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logos/Studio9DN-Wordmark-Forest.png" alt="Studio9DN" style="height: 26px; width: auto; display: block;">
+      </button>
+      <nav style="display: flex; align-items: center; gap: 28px;">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+          <button onClick="{{ n.onClick }}" style="{{ n.style }}">{{ n.label }}</button>
+        </sc-for>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: var(--text-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-subtle);">9°N Lagos</span>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex: 1;">
+
+    <!-- ============ HOME ============ -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div class="s9view">
+        <!-- Hero -->
+        <section style="max-width: 1180px; margin: 0 auto; padding: 96px 32px 72px;">
+          <div style="font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 28px;">Studio9DN — Architecture at 9 degrees north</div>
+          <h1 style="font-size: clamp(40px, 6vw, 84px); line-height: 1.02; letter-spacing: -0.02em; font-weight: 500; margin: 0; max-width: 15ch; text-wrap: balance;">Tropical architecture, <span style="font-family: var(--font-serif); font-style: italic; font-weight: 400;">designed to perform.</span></h1>
+          <p style="margin: 32px 0 0; max-width: 58ch; font-size: var(--text-lg); line-height: 1.55; color: var(--color-text-muted); text-wrap: pretty;">A holistic take on building performance — passive-first buildings tuned to heat, light and rain. We never compromise on quality, performance and sustainability.</p>
+          <div style="display: flex; gap: 14px; margin-top: 40px;">
+            <x-import component-from-global-scope="Studio9DNDesignSystem_7fd16e.Button" onClick="{{ goWork }}" hint-size="auto,44px">View our work</x-import>
+            <x-import component-from-global-scope="Studio9DNDesignSystem_7fd16e.Button" variant="ghost" onClick="{{ goContact }}" hint-size="auto,44px">Start a project</x-import>
+          </div>
+        </section>
+
+        <!-- Full-bleed feature image -->
+        <section style="max-width: 1180px; margin: 0 auto; padding: 0 32px;">
+          <div style="position: relative; height: 460px; border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, var(--forest-600), var(--forest-800));">
+            <div class="s9hatch"></div>
+            <div style="position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 40px;">
+              <div style="color: var(--stone-100);">
+                <div style="font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.8;">Featured — Ìdúnnú Residence</div>
+                <div style="font-size: var(--text-2xl); font-weight: 500; margin-top: 8px;">A courtyard house tuned to the breeze.</div>
+              </div>
+            </div>
+            <div class="s9imlabel">Ikoyi, Lagos</div>
+          </div>
+        </section>
+
+        <!-- Stats band -->
+        <section style="background: var(--forest-700); margin-top: 96px;">
+          <div style="max-width: 1180px; margin: 0 auto; padding: 72px 32px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; color: var(--stone-100);">
+            <sc-for list="{{ homeStats }}" as="s" hint-placeholder-count="4">
+              <div>
+                <div style="font-size: clamp(32px, 4vw, 52px); font-weight: 500; letter-spacing: -0.02em;">{{ s.n }}</div>
+                <div style="font-size: var(--text-sm); color: var(--stone-300); margin-top: 8px; text-wrap: pretty;">{{ s.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <!-- Selected work -->
+        <section style="max-width: 1180px; margin: 96px auto; padding: 0 32px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 40px;">
+            <h2 style="font-size: var(--text-3xl); font-weight: 500; letter-spacing: -0.01em; margin: 0;">Selected work</h2>
+            <button onClick="{{ goWork }}" class="s9link" style="border: none; background: transparent; font-family: var(--font-display); font-size: var(--text-sm); color: var(--color-text-muted); cursor: pointer;">All projects →</button>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+            <sc-for list="{{ featured }}" as="p" hint-placeholder-count="3">
+              <button onClick="{{ p.open }}" class="s9card" style="border: none; background: transparent; padding: 0; text-align: left; cursor: pointer;">
+                <div style="position: relative; height: 300px; border-radius: 10px; overflow: hidden; border: 1px solid var(--color-border);">
+                  <div class="s9zoom" style="position: absolute; inset: 0; background: {{ p.bg }};"></div>
+                  <div class="s9hatch"></div>
+                  <div class="s9imlabel">{{ p.place }}</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px;">
+                  <div style="font-size: var(--text-lg); font-weight: 500;">{{ p.name }}</div>
+                  <div style="font-size: var(--text-sm); color: var(--color-text-subtle);">{{ p.year }}</div>
+                </div>
+                <div style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: 4px;">{{ p.type }}</div>
+              </button>
+            </sc-for>
+          </div>
+        </section>
+
+        <!-- Services teaser -->
+        <section style="border-top: 1px solid var(--color-border); background: var(--stone-100);">
+          <div style="max-width: 1180px; margin: 0 auto; padding: 96px 32px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start;">
+            <div>
+              <div style="font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 20px;">What we do</div>
+              <h2 style="font-size: var(--text-3xl); font-weight: 500; margin: 0 0 20px; letter-spacing: -0.01em;">A holistic take on <span style="font-family: var(--font-serif); font-style: italic; font-weight: 400;">building performance.</span></h2>
+              <p style="font-size: var(--text-base); line-height: 1.6; color: var(--color-text-muted); max-width: 40ch; text-wrap: pretty;">Shade, cross-ventilation and daylight before machinery. We model performance from the first sketch.</p>
+              <button onClick="{{ goServices }}" class="s9link" style="border: none; background: transparent; margin-top: 24px; font-family: var(--font-display); font-size: var(--text-sm); color: var(--color-text); cursor: pointer;">Explore services →</button>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--color-border); border: 1px solid var(--color-border); border-radius: 10px; overflow: hidden;">
+              <sc-for list="{{ servicesShort }}" as="s" hint-placeholder-count="4">
+                <div style="background: var(--color-bg); padding: 28px 24px;">
+                  <div style="font-family: var(--font-display); font-size: var(--text-sm); color: var(--color-accent); font-weight: 500;">{{ s.no }}</div>
+                  <div style="font-size: var(--text-lg); font-weight: 500; margin-top: 10px;">{{ s.title }}</div>
+                  <div style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: 8px; line-height: 1.5; text-wrap: pretty;">{{ s.desc }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="max-width: 1180px; margin: 96px auto; padding: 0 32px;">
+          <div style="border-radius: 16px; background: var(--forest-800); padding: 72px 56px; color: var(--stone-100); display: flex; flex-direction: column; align-items: flex-start;">
+            <h2 style="font-size: clamp(28px, 4vw, 48px); font-weight: 500; margin: 0; letter-spacing: -0.01em; max-width: 18ch; text-wrap: balance;">Let's build something <span style="font-family: var(--font-serif); font-style: italic; font-weight: 400;">considered.</span></h2>
+            <p style="font-size: var(--text-lg); color: var(--stone-300); margin: 20px 0 32px; max-width: 46ch; text-wrap: pretty;">We reply to new enquiries within two working days.</p>
+            <x-import component-from-global-scope="Studio9DNDesignSystem_7fd16e.Button" variant="inverse" onClick="{{ goContact }}" hint-size="auto,44px">Start a project</x-import>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- ============ WORK ============ -->
+    <sc-if value="{{ isWork }}" hint-placeholder-val="{{ true }}">
+      <div class="s9view" style="max-width: 1180px; margin: 0 auto; padding: 72px 32px 96px;">
+        <div style="font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 20px;">Work — 120+ projects at 9°N</div>
+        <h1 style="font-size: clamp(36px, 5vw, 64px); font-weight: 500; letter-spacing: -0.02em; margin: 0 0 40px; max-width: 16ch; text-wrap: balance;">Buildings tuned to a tropical climate.</h1>
+        <div style="display: flex; gap: 10px; margin-bottom: 40px; flex-wrap: wrap;">
+          <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+            <button onClick="{{ t.onClick }}" style="{{ t.style }}">{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;">
+          <sc-for list="{{ filtered }}" as="p" hint-placeholder-count="6">
+            <button onClick="{{ p.open }}" class="s9card" style="border: none; background: transparent; padding: 0; text-align: left; cursor: pointer;">
+              <div style="position: relative; height: 360px; border-radius: 10px; overflow: hidden; border: 1px solid var(--color-border);">
+                <div class="s9zoom" style="position: absolute; inset: 0; background: {{ p.bg }};"></div>
+                <div class="s9hatch"></div>
+                <div class="s9imlabel">{{ p.place }}</div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 18px;">
+                <div style="font-size: var(--text-xl); font-weight: 500;">{{ p.name }}</div>
+                <div style="font-size: var(--text-sm); color: var(--color-text-subtle);">{{ p.year }}</div>
+              </div>
+              <div style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: 6px;">{{ p.type }} — {{ p.status }}</div>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ PROJECT DETAIL ============ -->
+    <sc-if value="{{ isProject }}" hint-placeholder-val="{{ true }}">
+      <div class="s9view">
+        <div style="max-width: 1180px; margin: 0 auto; padding: 40px 32px 0;">
+          <nav style="display: flex; gap: 8px; font-size: var(--text-sm); color: var(--color-text-subtle); margin-bottom: 40px;">
+            <button onClick="{{ goWork }}" class="s9link" style="border: none; background: transparent; padding: 0; font-family: var(--font-display); font-size: var(--text-sm); color: var(--color-text-muted); cursor: pointer;">Work</button>
+            <span>/</span>
+            <span>{{ cur.type }}</span>
+            <span>/</span>
+            <span style="color: var(--color-text);">{{ cur.name }}</span>
+          </nav>
+        </div>
+        <div style="max-width: 1180px; margin: 0 auto; padding: 0 32px;">
+          <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: end; margin-bottom: 40px;">
+            <div>
+              <div style="font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 16px;">{{ cur.type }} — {{ cur.place }}</div>
+              <h1 style="font-size: clamp(36px, 5vw, 64px); font-weight: 500; letter-spacing: -0.02em; margin: 0; max-width: 14ch; text-wrap: balance;">{{ cur.name }}</h1>
+            </div>
+            <p style="font-size: var(--text-lg); line-height: 1.55; color: var(--color-text-muted); margin: 0; text-wrap: pretty;">{{ cur.blurb }}</p>
+          </div>
+        </div>
+        <!-- Hero image -->
+        <div style="max-width: 1180px; margin: 0 auto; padding: 0 32px;">
+          <div style="position: relative; height: 520px; border-radius: 16px; overflow: hidden; border: 1px solid var(--color-border); background: {{ cur.bg }};">
+            <div class="s9hatch"></div>
+            <div class="s9imlabel">{{ cur.place }}</div>
+          </div>
+        </div>
+        <!-- Specs + body -->
+        <div style="max-width: 1180px; margin: 64px auto 96px; padding: 0 32px; display: grid; grid-template-columns: 1fr 2fr; gap: 64px; align-items: start;">
+          <aside style="border-top: 1px solid var(--color-text); padding-top: 20px;">
+            <sc-for list="{{ curSpecs }}" as="s" hint-placeholder-count="6">
+              <div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--color-border);">
+                <span style="font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-subtle);">{{ s.k }}</span>
+                <span style="font-size: var(--text-sm); font-weight: 500;">{{ s.v }}</span>
+              </div>
+            </sc-for>
+          </aside>
+          <div>
+            <h2 style="font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: var(--text-2xl); margin: 0 0 24px; letter-spacing: -0.01em;">Passive-first, from the first sketch.</h2>
+            <p style="font-size: var(--text-lg); line-height: 1.65; color: var(--color-text-muted); max-width: 60ch; margin: 0 0 24px; text-wrap: pretty;">The building is organised to move air and cast shade before any mechanical system is considered. Deep verandas wrap the living spaces, and a central void draws warm air upward and out — cross-ventilation doing the work a compressor otherwise would.</p>
+            <p style="font-size: var(--text-lg); line-height: 1.65; color: var(--color-text-muted); max-width: 60ch; margin: 0; text-wrap: pretty;">Locally sourced laterite and clay tile keep embodied carbon low and let the building age gracefully in the humid coastal climate. Daylight, airflow and energy were modelled room by room, so performance is measured, not assumed.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px;">
+              <div style="position: relative; height: 260px; border-radius: 10px; overflow: hidden; border: 1px solid var(--color-border); background: var(--stone-300);">
+                <div class="s9hatch"></div>
+                <div class="s9imlabel">Detail — brise-soleil</div>
+              </div>
+              <div style="position: relative; height: 260px; border-radius: 10px; overflow: hidden; border: 1px solid var(--color-border); background: {{ cur.bg }};">
+                <div class="s9hatch"></div>
+                <div class="s9imlabel">Courtyard</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Next projects -->
+        <section style="border-top: 1px solid var(--color-border); background: var(--stone-100);">
+          <div style="max-width: 1180px; margin: 0 auto; padding: 72px 32px;">
+            <div style="font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 32px;">More work</div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+              <sc-for list="{{ others }}" as="p" hint-placeholder-count="3">
+                <button onClick="{{ p.open }}" class="s9card" style="border: none; background: transparent; padding: 0; text-align: left; cursor: pointer;">
+                  <div style="position: relative; height: 240px; border-radius: 10px; overflow: hidden; border: 1px solid var(--color-border);">
+                    <div class="s9zoom" style="position: absolute; inset: 0; background: {{ p.bg }};"></div>
+                    <div class="s9hatch"></div>
+                    <div class="s9imlabel">{{ p.place }}</div>
+                  </div>
+                  <div style="font-size: var(--text-lg); font-weight: 500; margin-top: 14px;">{{ p.name }}</div>
+                  <div style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: 4px;">{{ p.type }}</div>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- ============ SERVICES ============ -->
+    <sc-if value="{{ isServices }}" hint-placeholder-val="{{ true }}">
+      <div class="s9view">
+        <section style="max-width: 1180px; margin: 0 auto; padding: 72px 32px 40px;">
+          <div style="font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 20px;">Services</div>
+          <h1 style="font-size: clamp(36px, 5vw, 64px); font-weight: 500; letter-spacing: -0.02em; margin: 0; max-width: 15ch; text-wrap: balance;">Performance, <span style="font-family: var(--font-serif); font-style: italic; font-weight: 400;">designed in.</span></h1>
+          <p style="font-size: var(--text-lg); line-height: 1.55; color: var(--color-text-muted); margin: 28px 0 0; max-width: 56ch; text-wrap: pretty;">Six disciplines, one passive-first outlook. We never compromise on quality, performance and sustainability.</p>
+        </section>
+        <section style="max-width: 1180px; margin: 0 auto 96px; padding: 0 32px;">
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--color-border); border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden;">
+            <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
+              <div style="background: var(--color-bg); padding: 40px 32px; min-height: 220px;">
+                <div style="font-size: var(--text-sm); color: var(--color-accent); font-weight: 500;">{{ s.no }}</div>
+                <div style="font-size: var(--text-xl); font-weight: 500; margin-top: 16px;">{{ s.title }}</div>
+                <div style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: 12px; line-height: 1.6; text-wrap: pretty;">{{ s.desc }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+        <!-- Process -->
+        <section style="background: var(--forest-700);">
+          <div style="max-width: 1180px; margin: 0 auto; padding: 96px 32px; color: var(--stone-100);">
+            <h2 style="font-size: var(--text-3xl); font-weight: 500; margin: 0 0 48px; letter-spacing: -0.01em;">How we work</h2>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px;">
+              <sc-for list="{{ process }}" as="p" hint-placeholder-count="6">
+                <div style="border-top: 1px solid var(--forest-500); padding-top: 20px;">
+                  <div style="font-size: var(--text-sm); color: var(--stone-300);">{{ p.no }}</div>
+                  <div style="font-size: var(--text-lg); font-weight: 500; margin-top: 10px;">{{ p.title }}</div>
+                  <div style="font-size: var(--text-sm); color: var(--stone-300); margin-top: 8px; line-height: 1.55; text-wrap: pretty;">{{ p.desc }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+        <!-- FAQ / capability accordion -->
+        <section style="max-width: 760px; margin: 96px auto; padding: 0 32px;">
+          <h2 style="font-size: var(--text-3xl); font-weight: 500; margin: 0 0 32px; letter-spacing: -0.01em;">Capabilities in depth</h2>
+          <sc-for list="{{ accordionItems }}" as="a" hint-placeholder-count="4">
+            <details style="border-bottom: 1px solid var(--color-border); padding: 20px 0;">
+              <summary style="cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-size: var(--text-lg); font-weight: 500;">
+                <span>{{ a.title }}</span>
+                <span style="color: var(--color-text-subtle); font-weight: 400;">+</span>
+              </summary>
+              <p style="font-size: var(--text-base); color: var(--color-text-muted); line-height: 1.6; margin: 16px 0 0; max-width: 60ch; text-wrap: pretty;">{{ a.content }}</p>
+            </details>
+          </sc-for>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- ============ STUDIO ============ -->
+    <sc-if value="{{ isStudio }}" hint-placeholder-val="{{ true }}">
+      <div class="s9view">
+        <section style="max-width: 1180px; margin: 0 auto; padding: 72px 32px 40px;">
+          <div style="font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 20px;">Studio — Lagos, 9°N</div>
+          <h1 style="font-size: clamp(36px, 5vw, 64px); font-weight: 500; letter-spacing: -0.02em; margin: 0; max-width: 18ch; text-wrap: balance;">Markers for clusters of ideals, <span style="font-family: var(--font-serif); font-style: italic; font-weight: 400;">keyed to coordinates.</span></h1>
+        </section>
+        <section style="max-width: 1180px; margin: 0 auto; padding: 0 32px 72px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;">
+          <div style="position: relative; height: 520px; border-radius: 16px; overflow: hidden; border: 1px solid var(--color-border); background: linear-gradient(135deg, var(--forest-600), var(--forest-800));">
+            <div class="s9hatch"></div>
+            <div class="s9imlabel">Studio — Ikoyi</div>
+          </div>
+          <div>
+            <p style="font-size: var(--text-xl); line-height: 1.5; margin: 0 0 24px; text-wrap: pretty;">Studio9DN is an independent, multidisciplinary practice rooted in tropical architecture, holistic building performance and sustainable design.</p>
+            <p style="font-size: var(--text-base); line-height: 1.65; color: var(--color-text-muted); margin: 0 0 20px; text-wrap: pretty;">9DN is 9 degrees north — a line of latitude through the birthplace of the practice, and the line that marks where the world turns tropical. We design for that climate specifically: shade, cross-ventilation, deep verandas and rainwater, before any machinery.</p>
+            <p style="font-size: var(--text-base); line-height: 1.65; color: var(--color-text-muted); margin: 0; text-wrap: pretty;">We work with real estate firms, institutions and private clients who share an acquired taste for fine design details — and we never compromise on quality, performance and sustainability.</p>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; border-top: 1px solid var(--color-border); padding-top: 32px;">
+              <sc-for list="{{ studioStats }}" as="s" hint-placeholder-count="3">
+                <div>
+                  <div style="font-size: var(--text-3xl); font-weight: 500; letter-spacing: -0.02em;">{{ s.n }}</div>
+                  <div style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: 6px;">{{ s.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+        <!-- Values -->
+        <section style="background: var(--stone-100); border-top: 1px solid var(--color-border);">
+          <div style="max-width: 1180px; margin: 0 auto; padding: 72px 32px;">
+            <div style="font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 32px;">Our values</div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;">
+              <sc-for list="{{ values }}" as="v" hint-placeholder-count="4">
+                <div style="border-top: 1px solid var(--color-text); padding-top: 20px;">
+                  <div style="font-size: var(--text-xl); font-weight: 500;">{{ v.title }}</div>
+                  <div style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: 10px; line-height: 1.55; text-wrap: pretty;">{{ v.desc }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+        <!-- Team -->
+        <section style="max-width: 1180px; margin: 96px auto; padding: 0 32px;">
+          <h2 style="font-size: var(--text-3xl); font-weight: 500; margin: 0 0 40px; letter-spacing: -0.01em;">The people</h2>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+            <sc-for list="{{ team }}" as="m" hint-placeholder-count="6">
+              <div>
+                <div style="position: relative; height: 300px; border-radius: 10px; overflow: hidden; border: 1px solid var(--color-border); background: {{ m.bg }};">
+                  <div class="s9hatch"></div>
+                </div>
+                <div style="font-size: var(--text-lg); font-weight: 500; margin-top: 16px;">{{ m.name }}</div>
+                <div style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: 2px;">{{ m.role }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- ============ CONTACT ============ -->
+    <sc-if value="{{ isContact }}" hint-placeholder-val="{{ true }}">
+      <div class="s9view" style="max-width: 1180px; margin: 0 auto; padding: 72px 32px 96px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
+        <div>
+          <div style="font-size: var(--text-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-text-subtle); margin-bottom: 20px;">Contact</div>
+          <h1 style="font-size: clamp(36px, 5vw, 60px); font-weight: 500; letter-spacing: -0.02em; margin: 0; max-width: 14ch; text-wrap: balance;">Let's build something <span style="font-family: var(--font-serif); font-style: italic; font-weight: 400;">considered.</span></h1>
+          <p style="font-size: var(--text-lg); line-height: 1.55; color: var(--color-text-muted); margin: 28px 0 40px; max-width: 44ch; text-wrap: pretty;">Tell us about the site, the brief and your ambitions. We reply within two working days.</p>
+          <div style="border-top: 1px solid var(--color-border);">
+            <sc-for list="{{ contactRows }}" as="c" hint-placeholder-count="4">
+              <div style="display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--color-border);">
+                <span style="font-size: var(--text-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-subtle);">{{ c.k }}</span>
+                <span style="font-size: var(--text-sm); font-weight: 500;">{{ c.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 40px;">
+          <div style="display: grid; gap: 20px;">
+            <x-import component-from-global-scope="Studio9DNDesignSystem_7fd16e.Input" label="Name" placeholder="Your name" hint-size="100%,64px"></x-import>
+            <x-import component-from-global-scope="Studio9DNDesignSystem_7fd16e.Input" label="Email" type="email" placeholder="you@studio.com" hint-size="100%,64px"></x-import>
+            <x-import component-from-global-scope="Studio9DNDesignSystem_7fd16e.Select" label="Project type" hint-size="100%,64px">
+              <option>Residential</option>
+              <option>Commercial</option>
+              <option>Institutional</option>
+              <option>Advisory / retrofit</option>
+            </x-import>
+            <x-import component-from-global-scope="Studio9DNDesignSystem_7fd16e.Textarea" label="About the project" placeholder="Site, brief and ambitions…" rows="4" hint-size="100%,120px"></x-import>
+            <x-import component-from-global-scope="Studio9DNDesignSystem_7fd16e.Button" onClick="{{ openSent }}" hint-size="100%,44px">Send enquiry</x-import>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background: var(--forest-800); color: var(--stone-300); margin-top: auto;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 72px 32px 40px;">
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--forest-600);">
+        <div>
+          <img src="assets/logos/Studio9DN-Wordmark-White.png" alt="Studio9DN" style="height: 28px; width: auto; display: block;">
+          <p style="font-size: var(--text-base); line-height: 1.6; margin: 24px 0 0; max-width: 36ch; color: var(--stone-300); text-wrap: pretty;">Tropical architecture, designed to perform. Based in Lagos, at 9 degrees north.</p>
+        </div>
+        <div>
+          <div style="font-size: var(--text-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone-500); margin-bottom: 18px;">Navigate</div>
+          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+            <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+              <button onClick="{{ n.onClick }}" class="s9link" style="border: none; background: transparent; padding: 0; font-family: var(--font-display); font-size: var(--text-sm); color: var(--stone-100); cursor: pointer;">{{ n.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: var(--text-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone-500); margin-bottom: 18px;">Studio</div>
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: var(--text-sm); color: var(--stone-100);">
+            <span>hello@studio9dn.com</span>
+            <span>+234 809 000 0000</span>
+            <span>Ikoyi, Lagos, Nigeria</span>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; padding-top: 28px; font-size: var(--text-xs); color: var(--stone-500);">
+        <span>© 2026 Studio9DN. All rights reserved.</span>
+        <span>9°N — where the world turns tropical.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sent dialog -->
+  <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 100; background: rgba(28,30,24,0.5); display: flex; align-items: center; justify-content: center; padding: 24px;" onClick="{{ closeSent }}">
+      <div style="background: var(--color-bg); border-radius: 16px; box-shadow: var(--shadow-lg); max-width: 440px; width: 100%; padding: 40px;">
+        <div style="font-size: var(--text-2xl); font-weight: 500; letter-spacing: -0.01em;">Enquiry received.</div>
+        <p style="font-size: var(--text-base); color: var(--color-text-muted); line-height: 1.6; margin: 16px 0 28px; text-wrap: pretty;">Thank you — we'll reply within two working days. In the meantime, feel free to keep exploring our work.</p>
+        <x-import component-from-global-scope="Studio9DNDesignSystem_7fd16e.Button" onClick="{{ closeSent }}" hint-size="auto,44px">Close</x-import>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { route: 'home', projectId: 'idunnu', filter: 'all', sent: false };
+
+  go(route) { this.setState({ route }); this._top(); }
+  openProject(id) { this.setState({ route: 'project', projectId: id }); this._top(); }
+  _top() { try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e) {} }
+
+  renderVals() {
+    const tones = {
+      forest: 'linear-gradient(135deg, var(--forest-600), var(--forest-800))',
+      stone:  'linear-gradient(135deg, var(--stone-300), var(--stone-500))',
+      light:  'linear-gradient(135deg, var(--stone-100), var(--stone-400))',
+      ochre:  'linear-gradient(135deg, var(--ochre-500), var(--forest-700))',
+    };
+    const base = [
+      { id: 'idunnu', name: 'Ìdúnnú Residence', type: 'Residential', place: 'Ikoyi, Lagos', year: '2024', tone: 'forest', blurb: 'A courtyard house organised around cross-ventilation and deep shaded verandas.', area: '640 m²', status: 'Completed' },
+      { id: 'canopy', name: 'Canopy Offices', type: 'Commercial', place: 'Victoria Island, Lagos', year: '2023', tone: 'stone', blurb: 'A perforated brise-soleil façade that cuts solar gain while framing the lagoon.', area: '3,200 m²', status: 'Completed' },
+      { id: 'grove', name: 'The Grove Pavilion', type: 'Institutional', place: 'Ibadan', year: '2023', tone: 'ochre', blurb: 'A timber-and-laterite teaching pavilion with a rain-harvesting butterfly roof.', area: '880 m²', status: 'Completed' },
+      { id: 'tide', name: 'Tideline Villas', type: 'Residential', place: 'Lekki, Lagos', year: '2025', tone: 'light', blurb: 'Six stepped villas tuned to the prevailing sea breeze and afternoon shade.', area: '2,100 m²', status: 'In progress' },
+      { id: 'market', name: 'Oja Market Hall', type: 'Institutional', place: 'Abeokuta', year: '2024', tone: 'forest', blurb: 'A naturally lit market under a lightweight vaulted canopy of local clay tile.', area: '4,500 m²', status: 'In progress' },
+      { id: 'atrium', name: 'Laterite Atrium', type: 'Commercial', place: 'Abuja', year: '2022', tone: 'stone', blurb: 'A workplace built around a shaded planted atrium that draws air upward.', area: '5,800 m²', status: 'Completed' },
+    ];
+    const projects = base.map(p => ({ ...p, bg: tones[p.tone], open: () => this.openProject(p.id) }));
+
+    const route = this.state.route;
+    const filter = this.state.filter;
+    const filtered = filter === 'all' ? projects : projects.filter(p => p.type === filter);
+    const featured = projects.slice(0, 3);
+    const cur = projects.find(p => p.id === this.state.projectId) || projects[0];
+    const others = projects.filter(p => p.id !== cur.id).slice(0, 3);
+
+    const navBase = [
+      { id: 'home', label: 'Home' }, { id: 'work', label: 'Work' },
+      { id: 'services', label: 'Services' }, { id: 'studio', label: 'Studio' },
+      { id: 'contact', label: 'Contact' },
+    ];
+    const nav = navBase.map(n => ({
+      label: n.label,
+      onClick: () => this.go(n.id),
+      style: {
+        border: 'none', background: 'transparent', cursor: 'pointer', padding: '4px 0',
+        fontFamily: 'var(--font-display)', fontSize: 'var(--text-sm)', letterSpacing: '0.02em',
+        fontWeight: route === n.id ? 500 : 400,
+        color: route === n.id ? 'var(--color-text)' : 'var(--color-text-muted)',
+        borderBottom: route === n.id ? '2px solid var(--color-accent)' : '2px solid transparent',
+      },
+    }));
+
+    const tabsBase = [
+      { id: 'all', label: 'All' }, { id: 'Residential', label: 'Residential' },
+      { id: 'Commercial', label: 'Commercial' }, { id: 'Institutional', label: 'Institutional' },
+    ];
+    const tabs = tabsBase.map(t => {
+      const active = filter === t.id;
+      return {
+        label: t.label,
+        onClick: () => this.setState({ filter: t.id }),
+        style: {
+          padding: '9px 18px', borderRadius: '6px', cursor: 'pointer',
+          fontFamily: 'var(--font-display)', fontSize: 'var(--text-sm)', fontWeight: 500,
+          border: '1px solid ' + (active ? 'var(--forest-700)' : 'var(--color-border)'),
+          background: active ? 'var(--forest-700)' : 'transparent',
+          color: active ? 'var(--stone-100)' : 'var(--color-text-muted)',
+          transition: 'all 160ms ease-out',
+        },
+      };
+    });
+
+    const curSpecs = [
+      { k: 'Location', v: cur.place }, { k: 'Year', v: cur.year }, { k: 'Area', v: cur.area },
+      { k: 'Type', v: cur.type }, { k: 'Status', v: cur.status }, { k: 'Role', v: 'Architecture' },
+    ];
+
+    return {
+      route, filtered, featured, cur, others, nav, tabs, curSpecs,
+      isHome: route === 'home', isWork: route === 'work', isProject: route === 'project',
+      isStudio: route === 'studio', isServices: route === 'services', isContact: route === 'contact',
+      goHome: () => this.go('home'), goWork: () => this.go('work'),
+      goServices: () => this.go('services'), goContact: () => this.go('contact'),
+      sent: this.state.sent,
+      openSent: () => this.setState({ sent: true }),
+      closeSent: () => this.setState({ sent: false }),
+      homeStats: [
+        { n: '120+', label: 'Projects at 9°N' }, { n: '9°N', label: 'Our latitude, Lagos' },
+        { n: '12yr', label: 'In practice' }, { n: '2 days', label: 'To reply to enquiries' },
+      ],
+      studioStats: [
+        { n: '120+', label: 'Projects delivered' }, { n: '18', label: 'People in the studio' },
+        { n: '9°N', label: 'Where we design for' },
+      ],
+      servicesShort: [
+        { no: '01', title: 'Tropical architecture', desc: 'Passive-first buildings tuned to heat, light and rain.' },
+        { no: '02', title: 'Building performance', desc: 'Daylight, airflow and energy modelled from the first sketch.' },
+        { no: '03', title: 'Sustainable design', desc: 'Local materials and low embodied carbon, built to last.' },
+        { no: '04', title: 'Interiors & detailing', desc: 'A delicate treatment of fine detail, buildable and resilient.' },
+      ],
+      services: [
+        { no: '01', title: 'Tropical architecture', desc: 'Passive-first buildings tuned to heat, light and rain — shade, cross-ventilation and daylight before machinery.' },
+        { no: '02', title: 'Building performance', desc: 'We model daylight, airflow and energy from the first sketch, so performance is designed in rather than added on.' },
+        { no: '03', title: 'Sustainable design', desc: 'Local materials, low embodied carbon and details that age gracefully in a humid coastal climate.' },
+        { no: '04', title: 'Interiors & detailing', desc: 'A delicate treatment of fine detail, backed by a resilient, buildable outlook.' },
+        { no: '05', title: 'Masterplanning', desc: 'Site strategies that place buildings for shade, breeze and rainwater across the whole plot.' },
+        { no: '06', title: 'Advisory & retrofit', desc: 'Performance audits and passive retrofits for existing buildings and portfolios.' },
+      ],
+      process: [
+        { no: '01', title: 'Enquiry', desc: 'We reply within two working days and agree scope together.' },
+        { no: '02', title: 'Concept', desc: 'Site, climate and brief resolved into a passive-first parti.' },
+        { no: '03', title: 'Performance', desc: 'Daylight, airflow and energy modelled and tuned room by room.' },
+        { no: '04', title: 'Documentation', desc: 'Detailed drawings and specification prepared for construction.' },
+        { no: '05', title: 'Construction', desc: 'On-site support through to practical completion.' },
+        { no: '06', title: 'Handover', desc: 'Commissioning, aftercare and a performance review.' },
+      ],
+      accordionItems: [
+        { title: 'Tropical architecture', content: 'Passive-first design tuned to a hot, humid climate — shade, ventilation, daylight and rainwater first; machinery last.' },
+        { title: 'Building performance', content: 'We model daylight, airflow and energy from the first sketch so performance is designed in, not added on.' },
+        { title: 'Sustainable design', content: 'Local materials, low embodied carbon, and buildings that age gracefully in the coastal climate.' },
+        { title: 'Interiors & detailing', content: 'A delicate treatment of fine detail, backed by a resilient outlook — for clients with an acquired taste.' },
+      ],
+      values: [
+        { title: 'Confident', desc: 'We stand behind considered decisions and see them through.' },
+        { title: 'Creative', desc: 'Editorial, asymmetric, generous with space — never generic.' },
+        { title: 'Driven', desc: 'Performance is measured and improved, not assumed.' },
+        { title: 'Detail-oriented', desc: 'We never compromise on quality, performance and sustainability.' },
+      ],
+      team: [
+        { name: 'Adé Ogunyemi', role: 'Founding Principal', bg: tones.forest },
+        { name: 'Ada Okafor', role: 'Principal Architect', bg: tones.stone },
+        { name: 'Tunde Bello', role: 'Performance Lead', bg: tones.ochre },
+        { name: 'Ngozi Eze', role: 'Project Architect', bg: tones.light },
+        { name: 'Femi Adesina', role: 'Architect', bg: tones.stone },
+        { name: 'Zainab Yusuf', role: 'Interiors Lead', bg: tones.forest },
+      ],
+      contactRows: [
+        { k: 'Email', v: 'hello@studio9dn.com' }, { k: 'Phone', v: '+234 809 000 0000' },
+        { k: 'Studio', v: 'Ikoyi, Lagos' }, { k: 'Latitude', v: '9°N' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

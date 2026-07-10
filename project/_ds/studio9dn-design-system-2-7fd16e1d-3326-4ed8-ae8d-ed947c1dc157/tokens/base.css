@@ -1,0 +1,61 @@
+/* Studio9DN — base element styles.
+ * Light reset + brand typographic defaults. Imported last from styles.css.
+ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  font-weight: var(--weight-regular);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headings — Clash Grotesk, tight tracking on large sizes */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+  color: var(--color-text);
+}
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-xl); }
+h3 { font-size: var(--text-md); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-normal); }
+h4 { font-size: var(--text-sm); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-normal); }
+
+/* Editorial serif emphasis — Rowan italic (brand H2 voice) */
+.serif, .editorial {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--weight-light, 300);
+  letter-spacing: 0;
+}
+
+p { margin: 0 0 1em; max-width: var(--text-measure); text-wrap: pretty; }
+
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 0.18em; }
+
+/* Eyebrow / label utility — Clash Grotesk, tracked, uppercase */
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+::selection { background: var(--forest-200); color: var(--forest-900); }
+
+:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }

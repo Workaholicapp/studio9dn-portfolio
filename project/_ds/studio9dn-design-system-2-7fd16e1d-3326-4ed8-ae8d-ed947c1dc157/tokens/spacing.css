@@ -1,0 +1,27 @@
+/* Studio9DN — Spacing & layout tokens
+ * 8px baseline rhythm (brand). Section break = 96px. Generous negative space
+ * is a brand principle — err toward more space, not less.
+ */
+
+:root {
+  --space-0: 0;
+  --space-1: 0.25rem;  /* 4 */
+  --space-2: 0.5rem;   /* 8 — baseline */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-5: 1.5rem;   /* 24 — gutter */
+  --space-6: 2rem;     /* 32 */
+  --space-7: 3rem;     /* 48 */
+  --space-8: 4rem;     /* 64 */
+  --space-9: 6rem;     /* 96 — section break */
+  --space-10: 8rem;    /* 128 */
+
+  /* Layout */
+  --container-max: 1180px;   /* app / marketing shell */
+  --measure-max: 680px;      /* long-form reading */
+  --gutter: 1.5rem;
+  --grid-columns: 12; /* @kind other */
+
+  /* Clear space around logo = height of the 'N' (brand rule) */
+  --logo-clearspace: 1em;
+}

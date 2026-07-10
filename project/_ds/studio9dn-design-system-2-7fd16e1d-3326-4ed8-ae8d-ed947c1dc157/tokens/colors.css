@@ -1,0 +1,78 @@
+/* Studio9DN — Colour tokens
+ * Anchored on PANTONE Black 3 ("Forest", #434A36) — the single hero colour.
+ * The brand avoids true black & white in favour of warm, subdued tones, and
+ * uses a tint system (20% steps) for hovers, backgrounds and depth.
+ * Yellow & Navy are documented secondary accents; exact brand hex values were
+ * not recoverable from the guidelines PDF — values below are tasteful
+ * approximations. Confirm against Pantone references before production use.
+ */
+
+:root {
+  /* ---- Forest ramp (primary brand, mixed toward warm paper) ---- */
+  --forest-900: #2b3023;
+  --forest-800: #373d2c;
+  --forest-700: #434a36; /* BRAND FOREST — Pantone Black 3 */
+  --forest-600: #545c45;
+  --forest-500: #6a7259;
+  --forest-400: #8b9279;
+  --forest-300: #aeb39e;
+  --forest-200: #ccd0c1;
+  --forest-100: #e5e7de;
+  --forest-50:  #f1f2ed;
+
+  /* ---- Warm neutral ramp (subdued black → subdued white) ---- */
+  --stone-900: #1c1d18; /* subdued black / ink */
+  --stone-800: #2a2b24;
+  --stone-700: #44453d;
+  --stone-600: #5e5f55;
+  --stone-500: #7b7c71;
+  --stone-400: #9c9d92;
+  --stone-300: #bfbfb5;
+  --stone-200: #dad9cf;
+  --stone-100: #ecebe1;
+  --stone-50:  #f5f3ec; /* subdued white / paper */
+  --paper:     #faf9f3; /* lifted near-white surface */
+
+  /* ---- Secondary accents (approximate — verify before production) ---- */
+  --ochre-600: #b1842c;
+  --ochre-500: #c99a3b; /* "Yellow" */
+  --ochre-100: #f0e4c7;
+  --navy-700:  #232f3d;
+  --navy-600:  #2d3c4d; /* "Navy" */
+  --navy-100:  #d4dae0;
+
+  /* ---- Status ---- */
+  --color-success: #5b6b3a;
+  --color-warning: #b1842c;
+  --color-danger:  #a6432f;
+  --color-danger-soft: #f1ddd6;
+
+  /* ---- Semantic aliases ---- */
+  --color-bg:            var(--stone-50);
+  --color-bg-sunken:     var(--stone-100);
+  --color-surface:       var(--paper);
+  --color-surface-2:     var(--stone-100);
+  --color-inverse:       var(--forest-700);
+  --color-inverse-2:     var(--forest-900);
+
+  --color-text:          var(--stone-900);
+  --color-text-muted:    var(--stone-600);
+  --color-text-subtle:   var(--stone-500);
+  --color-text-on-dark:  var(--stone-50);
+  --color-text-on-dark-muted: var(--forest-200);
+
+  --color-border:        var(--stone-200);
+  --color-border-strong: var(--stone-300);
+  --color-border-on-dark: var(--forest-600);
+
+  --color-primary:       var(--forest-700);
+  --color-primary-hover: var(--forest-800);
+  --color-primary-press: var(--forest-900);
+  --color-on-primary:    var(--stone-50);
+  --color-primary-soft:  var(--forest-100);
+
+  --color-accent:        var(--ochre-500);
+  --color-accent-soft:   var(--ochre-100);
+
+  --color-focus-ring:    var(--forest-500);
+}
