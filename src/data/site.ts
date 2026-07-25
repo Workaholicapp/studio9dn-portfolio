@@ -89,7 +89,7 @@ export const creatives = [
   { title: "Bay Atlantic — Collateral", tag: "Graphic design", bg: tones.forest, slot: "cr-bay" },
   { title: "Terracotta Screen — Product", tag: "Product design", bg: tones.ochre, slot: "cr-terracotta" },
   { title: "9DN — Title Sequence", tag: "Motion & digital", bg: tones.light, slot: "cr-title" },
-];
+].map((c) => ({ ...c, img: `/images/creatives/${c.slot}.jpg` }));
 
 const pastels = ["var(--forest-100)", "var(--stone-100)", "var(--ochre-100)", "var(--navy-100)"];
 
@@ -100,4 +100,4 @@ export const team = [
   { name: "Interior Designer", role: "Interiors & space planning", slot: "team-interior", line: "A room should feel resolved from the inside before it ever photographs well from the outside." },
   { name: "Visualization Specialist", role: "3D visualization & animation", slot: "team-viz", line: "We build the space in light long before anyone breaks ground on it." },
   { name: "Technical Documentation Lead", role: "Working drawings & QA", slot: "team-docs", line: "Precision on paper is what keeps a beautiful idea beautiful once it's built." },
-].map((m, i) => ({ ...m, pastel: pastels[i % pastels.length] }));
+].map((m, i) => ({ ...m, pastel: pastels[i % pastels.length], img: `/images/team/${m.slot}.jpg` }));

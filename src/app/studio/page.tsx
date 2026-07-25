@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ImageSlot from "@/components/image-slot/ImageSlot";
+import SiteImage from "@/components/media/SiteImage";
 import { studioStats, values, team } from "@/data/site";
 
 export default function StudioPage() {
@@ -29,8 +29,8 @@ export default function StudioPage() {
       </section>
 
       <section style={{ maxWidth: 1180, margin: "0 auto", padding: "24px 32px 72px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "start" }}>
-        <div className="r3d tilt3d" style={{ position: "relative", height: 520, borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)", background: "linear-gradient(135deg, var(--forest-600), var(--forest-800))" }}>
-          <ImageSlot id="studio-hero" placeholder="Click to browse or drop a studio photo" />
+        <div className="r3d tilt3d" style={{ position: "relative", height: 520, borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)" }}>
+          <SiteImage src="/images/site/studio-hero.jpg" alt="Studio9DN — studio" background="linear-gradient(135deg, var(--forest-600), var(--forest-800))" />
           <div className="s9imlabel">Studio — Ikoyi</div>
         </div>
         <div className="r3d d1">
@@ -74,7 +74,7 @@ export default function StudioPage() {
             <div className="s9people-thumbs">
               {thumbs.map((m) => (
                 <button key={m.slot} type="button" onClick={() => selectPerson(m.i)} className="s9people-thumb" style={{ background: m.pastel }} aria-label={m.name}>
-                  <ImageSlot id={m.slot} placeholder="Photo" />
+                  <SiteImage src={m.img} alt={m.name} />
                 </button>
               ))}
             </div>
@@ -82,7 +82,7 @@ export default function StudioPage() {
           <button type="button" onClick={() => setPeopleOn((o) => !o)} className={"s9people-hero" + (peopleOn ? " on" : "")} aria-label="Reveal in colour">
             <span className="bgc" style={{ background: featured.pastel }} />
             <span className="imgc">
-              <ImageSlot id={featured.slot} placeholder="Click to browse or drop portrait" />
+              <SiteImage src={featured.img} alt={featured.name} />
             </span>
           </button>
           <div className="s9people-side">

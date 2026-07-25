@@ -1,7 +1,7 @@
 import Link from "next/link";
 import HeroWordField from "@/components/home/HeroWordField";
 import ProjectCard from "@/components/project/ProjectCard";
-import ImageSlot from "@/components/image-slot/ImageSlot";
+import SiteImage from "@/components/media/SiteImage";
 import PanoViewer from "@/components/pano/PanoViewer";
 import Button from "@/components/ui/Button";
 import { projects } from "@/data/projects";
@@ -32,8 +32,8 @@ export default function HomePage() {
       {/* We create unique experiences */}
       <section className="scene" style={{ position: "relative", overflow: "hidden", maxWidth: 1280, margin: "0 auto", padding: "8px 32px 48px" }}>
         <div style={{ position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1.05fr 0.95fr", gap: 56, alignItems: "center" }}>
-          <div className="tilt3d r3d" style={{ position: "relative", height: "clamp(340px, 44vw, 520px)", borderRadius: 4, overflow: "hidden", background: "var(--stone-300)" }}>
-            <ImageSlot id="home-people" placeholder="Drop a black & white studio photo" />
+          <div className="tilt3d r3d" style={{ position: "relative", height: "clamp(340px, 44vw, 520px)", borderRadius: 4, overflow: "hidden" }}>
+            <SiteImage src="/images/site/home-people.jpg" alt="Studio9DN — studio photo" background="var(--stone-300)" />
           </div>
           <div className="r3d d1">
             <h2 style={{ fontSize: "clamp(28px, 3.4vw, 46px)", lineHeight: 1.05, letterSpacing: "-0.02em", fontWeight: 600, margin: 0, color: "var(--stone-900)", textWrap: "balance" }}>We create unique spatial experiences.</h2>
@@ -86,7 +86,7 @@ export default function HomePage() {
 
       {/* 360° panorama band */}
       <section className="s9pano scene" style={{ position: "relative", overflow: "hidden", background: "#0f100c", marginTop: 40 }}>
-        <PanoViewer slotId="pano-360" />
+        <PanoViewer src="/images/site/pano-equirectangular.jpg" />
       </section>
 
       {/* CTA button */}

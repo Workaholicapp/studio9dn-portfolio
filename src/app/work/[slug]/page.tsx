@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ImageSlot from "@/components/image-slot/ImageSlot";
+import SiteImage from "@/components/media/SiteImage";
 import ProjectCard from "@/components/project/ProjectCard";
 import { getProject, projects } from "@/data/projects";
 
@@ -45,8 +45,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       </div>
       {/* Hero image */}
       <div style={{ maxWidth: 1180, margin: "0 auto", padding: "0 32px" }}>
-        <div className="r3d" style={{ position: "relative", height: "clamp(360px, 52vw, 560px)", borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)", background: cur.bg }}>
-          <ImageSlot id={cur.hero} placeholder="Click to browse or drop project image" />
+        <div className="r3d" style={{ position: "relative", height: "clamp(360px, 52vw, 560px)", borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)" }}>
+          <SiteImage src={cur.heroImg} alt={cur.name} background={cur.bg} />
           <div className="s9imlabel">{cur.place}</div>
         </div>
       </div>
@@ -66,12 +66,12 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <h2 style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", fontWeight: 400, fontSize: "var(--text-2xl)", margin: "0 0 24px", letterSpacing: "-0.01em" }}>Design approach</h2>
           <p style={{ fontSize: "var(--text-lg)", lineHeight: 1.65, color: "var(--color-text-muted)", maxWidth: "60ch", margin: 0, textWrap: "pretty" }}>{cur.approach}</p>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 48 }}>
-            <div style={{ position: "relative", height: 260, borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)", background: "var(--stone-300)" }}>
-              <ImageSlot id={cur.ga} placeholder="Click to browse or drop" />
+            <div style={{ position: "relative", height: 260, borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)" }}>
+              <SiteImage src={cur.gaImg} alt={`${cur.name} — detail`} background="var(--stone-300)" />
               <div className="s9imlabel">Detail — brise-soleil</div>
             </div>
-            <div style={{ position: "relative", height: 260, borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)", background: cur.bg }}>
-              <ImageSlot id={cur.gb} placeholder="Click to browse or drop" />
+            <div style={{ position: "relative", height: 260, borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)" }}>
+              <SiteImage src={cur.gbImg} alt={`${cur.name} — courtyard`} background={cur.bg} />
               <div className="s9imlabel">Courtyard</div>
             </div>
           </div>

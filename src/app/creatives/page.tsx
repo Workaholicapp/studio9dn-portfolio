@@ -1,4 +1,4 @@
-import ImageSlot from "@/components/image-slot/ImageSlot";
+import SiteImage from "@/components/media/SiteImage";
 import Button from "@/components/ui/Button";
 import { creatives } from "@/data/site";
 
@@ -17,8 +17,8 @@ export default function CreativesPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "40px 28px" }}>
           {creatives.map((c) => (
             <div key={c.slot} className="s9card r3d tilt3d">
-              <div className="tl-lift" style={{ position: "relative", height: 300, borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)", background: c.bg }}>
-                <ImageSlot id={c.slot} placeholder="Click to browse or drop artwork" />
+              <div className="tl-lift" style={{ position: "relative", height: 300, borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)" }}>
+                <SiteImage src={c.img} alt={c.title} background={c.bg} />
                 <div className="s9imlabel">{c.tag}</div>
               </div>
               <div style={{ fontSize: "var(--text-lg)", fontWeight: 600, marginTop: 16, color: "var(--stone-900)" }}>{c.title}</div>

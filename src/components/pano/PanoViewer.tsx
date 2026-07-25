@@ -2,17 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import ImageSlot from "@/components/image-slot/ImageSlot";
 
-export default function PanoViewer({ slotId = "pano-360" }: { slotId?: string }) {
+export default function PanoViewer({ src = "/images/site/pano-equirectangular.jpg" }: { src?: string }) {
   const viewRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [grabbing, setGrabbing] = useState(false);
   const [gyroOn, setGyroOn] = useState(false);
-  // The slot sits at z-index 1 (behind the canvas) by default; "change photo"
-  // brings it to z-index 6 (in front) so the user can drop a replacement.
-  const [slotInFront, setSlotInFront] = useState(false);
   const [hasImage, setHasImage] = useState(false);
+  const [missing, setMissing] = useState(false);
 
   const three = useRef<{
     renderer?: THREE.WebGLRenderer;
@@ -35,6 +32,19 @@ export default function PanoViewer({ slotId = "pano-360" }: { slotId?: string })
     scene.add(new THREE.Mesh(geo, mat));
     three.current = { renderer, scene, camera, mat };
 
+    new THREE.TextureLoader().load(
+      src,
+      (tex) => {
+        tex.minFilter = THREE.LinearFilter;
+        tex.colorSpace = THREE.SRGBColorSpace;
+        mat.map = tex;
+        mat.needsUpdate = true;
+        setHasImage(true);
+      },
+      undefined,
+      () => setMissing(true)
+    );
+
     const resize = () => {
       const w = view.clientWidth, h = view.clientHeight;
       if (!w || !h) return;
@@ -46,7 +56,7 @@ export default function PanoViewer({ slotId = "pano-360" }: { slotId?: string })
 
     const onPointerDown = (e: PointerEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest?.("button, .s9-image-slot")) return;
+      if (target.closest?.("button")) return;
       state.current.drag = true;
       state.current.px = e.clientX;
       state.current.py = e.clientY;
@@ -124,20 +134,7 @@ export default function PanoViewer({ slotId = "pano-360" }: { slotId?: string })
       window.removeEventListener("deviceorientation", onOrient, true);
       renderer.dispose();
     };
-  }, []);
-
-  const loadTexture = (src: string) => {
-    const t = three.current;
-    if (!t.mat) return;
-    new THREE.TextureLoader().load(src, (tex) => {
-      tex.minFilter = THREE.LinearFilter;
-      tex.colorSpace = THREE.SRGBColorSpace;
-      t.mat!.map = tex;
-      t.mat!.needsUpdate = true;
-      setHasImage(true);
-      setSlotInFront(false);
-    });
-  };
+  }, [src]);
 
   const zoom = (d: number) => {
     const t = three.current;
@@ -164,24 +161,17 @@ export default function PanoViewer({ slotId = "pano-360" }: { slotId?: string })
       ref={viewRef}
       className={"s9pano-view" + (grabbing ? " grab" : "")}
       id="s9panoView"
-      style={{ position: "relative", width: "100%", height: "min(84vh, 840px)", minHeight: 480, overflow: "hidden", cursor: "grab", touchAction: "none" }}
+      style={{ position: "relative", width: "100%", height: "min(84vh, 840px)", minHeight: 480, overflow: "hidden", cursor: hasImage ? "grab" : "default", touchAction: "none" }}
     >
-      <div
-        id="s9panoSlot"
-        style={{
-          position: "absolute", inset: 0,
-          zIndex: slotInFront ? 6 : 1,
-          pointerEvents: hasImage && !slotInFront ? "none" : "auto",
-        }}
-      >
-        <ImageSlot
-          id={slotId}
-          reveal={false}
-          placeholder="Drop a 360° / equirectangular photo — then look around, zoom & grab"
-          onImageChange={(src) => { if (src) loadTexture(src); }}
-        />
-      </div>
       <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, zIndex: 2, display: hasImage ? "block" : "none", width: "100%", height: "100%" }} />
+      {missing && (
+        <div className="s9img-missing" style={{ position: "absolute", inset: 0, zIndex: 1, border: "none" }}>
+          <div className="plate">
+            <span>Add a 360°/equirectangular photo at</span>
+            <code>{src}</code>
+          </div>
+        </div>
+      )}
       <div
         aria-hidden="true"
         style={{
@@ -189,19 +179,20 @@ export default function PanoViewer({ slotId = "pano-360" }: { slotId?: string })
           background: "linear-gradient(90deg, rgba(15,16,12,0.5), transparent 16%, transparent 84%, rgba(15,16,12,0.5)), linear-gradient(0deg, rgba(15,16,12,0.72), transparent 42%)",
         }}
       />
-      <div
-        style={{
-          position: "absolute", top: 22, left: "50%", transform: "translateX(-50%)", zIndex: 5,
-          display: "inline-flex", alignItems: "center", gap: 9, fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase",
-          color: "rgba(245,243,236,0.82)", background: "rgba(15,16,12,0.4)", backdropFilter: "blur(6px)", padding: "9px 16px", pointerEvents: "none",
-        }}
-      >
-        <span aria-hidden="true" style={{ fontSize: 13 }}>✛</span> Drag to look · scroll or pinch to zoom · tilt to pan
-      </div>
+      {hasImage && (
+        <div
+          style={{
+            position: "absolute", top: 22, left: "50%", transform: "translateX(-50%)", zIndex: 5,
+            display: "inline-flex", alignItems: "center", gap: 9, fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase",
+            color: "rgba(245,243,236,0.82)", background: "rgba(15,16,12,0.4)", backdropFilter: "blur(6px)", padding: "9px 16px", pointerEvents: "none",
+          }}
+        >
+          <span aria-hidden="true" style={{ fontSize: 13 }}>✛</span> Drag to look · scroll or pinch to zoom · tilt to pan
+        </div>
+      )}
       <div className="s9pano-zoom" style={{ position: "absolute", top: 20, right: 20, zIndex: 5, display: "flex", flexDirection: "column", gap: 8 }}>
         <button className="s9pano-ic" type="button" aria-label="Zoom in" onClick={() => zoom(-8)}>+</button>
         <button className="s9pano-ic" type="button" aria-label="Zoom out" onClick={() => zoom(8)}>−</button>
-        <button className="s9pano-ic" type="button" aria-label="Change photo" title="Change photo" onClick={() => setSlotInFront(true)}>⟳</button>
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, zIndex: 5, padding: "clamp(28px, 5vw, 56px)", display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 28, flexWrap: "wrap" }}>
         <div style={{ pointerEvents: "none" }}>

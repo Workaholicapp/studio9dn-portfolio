@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useApp } from "@/lib/app-context";
-import ImageSlot from "@/components/image-slot/ImageSlot";
+import SiteImage from "@/components/media/SiteImage";
 import { projects, sceneFor, disciplineLabel, patternClasses, type Discipline } from "@/data/projects";
 
 const tabsBase: { id: "all" | Discipline; label: string }[] = [
@@ -71,8 +71,8 @@ export default function WorkPage() {
             <div className="s9stackcard-inner" style={i % 2 === 1 ? { flexDirection: "row-reverse" } : undefined}>
               <div className="s9stackcard-media" style={{ overflow: "hidden" }}>
                 <div className="s9stackcard-mediainner" data-parallax="0.05">
-                  <div style={{ position: "absolute", inset: 0, background: p.bg }}>
-                    <ImageSlot id={p.card} placeholder="Click to browse or drop" />
+                  <div style={{ position: "absolute", inset: 0 }}>
+                    <SiteImage src={p.cardImg} alt={p.name} background={p.bg} />
                   </div>
                 </div>
                 <div className="s9imlabel">{p.place}</div>

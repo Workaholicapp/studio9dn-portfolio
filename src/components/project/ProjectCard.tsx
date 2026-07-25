@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ImageSlot from "@/components/image-slot/ImageSlot";
+import SiteImage from "@/components/media/SiteImage";
 import type { Project } from "@/data/projects";
 
 export default function ProjectCard({
@@ -16,8 +16,8 @@ export default function ProjectCard({
   return (
     <div className={"s9card r3d tilt3d" + (r3dClass ? ` ${r3dClass}` : "")} style={{ textAlign: "left" }}>
       <div className="tl-lift" style={{ position: "relative", height, borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)" }}>
-        <div className="s9zoom" style={{ position: "absolute", inset: 0, background: project.bg }}>
-          <ImageSlot id={project.card} placeholder="Click to browse or drop" />
+        <div className="s9zoom" style={{ position: "absolute", inset: 0 }}>
+          <SiteImage src={project.cardImg} alt={project.name} background={project.bg} />
         </div>
         <div className="s9imlabel">{project.place}</div>
       </div>

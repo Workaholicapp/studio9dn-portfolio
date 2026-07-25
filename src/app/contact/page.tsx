@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ImageSlot from "@/components/image-slot/ImageSlot";
+import SiteImage from "@/components/media/SiteImage";
 import Button from "@/components/ui/Button";
 import Compass from "@/components/ui/Compass";
 import { Input, Select, Textarea } from "@/components/ui/Field";
@@ -40,8 +40,8 @@ export default function ContactPage() {
 
       {/* Studio location band */}
       <section style={{ maxWidth: 1180, margin: "0 auto", padding: "88px 32px 0", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
-        <div className="r3d" data-parallax="0.05" style={{ position: "relative", height: "min(46vw, 420px)", minHeight: 280, borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)", background: "var(--forest-700)" }}>
-          <ImageSlot id="contact-studio-photo" placeholder="Drop a studio or site photo" />
+        <div className="r3d" data-parallax="0.05" style={{ position: "relative", height: "min(46vw, 420px)", minHeight: 280, borderRadius: 4, overflow: "hidden", border: "1px solid var(--color-border)" }}>
+          <SiteImage src="/images/site/contact-studio-photo.jpg" alt="Studio9DN — Lagos" background="var(--forest-700)" />
           <div className="s9imlabel">Lagos, Nigeria</div>
         </div>
         <div>

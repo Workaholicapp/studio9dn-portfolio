@@ -30,6 +30,10 @@ export interface Project extends ProjectBase {
   hero: string;
   ga: string;
   gb: string;
+  cardImg: string; // static asset path — drop the file in to fill it
+  heroImg: string;
+  gaImg: string;
+  gbImg: string;
 }
 
 export const tones: Record<ProjectTone, string> = {
@@ -224,6 +228,10 @@ export const projects: Project[] = base.map((p) => ({
   hero: "hero-" + p.id,
   ga: "ga-" + p.id,
   gb: "gb-" + p.id,
+  cardImg: `/images/projects/card-${p.id}.jpg`,
+  heroImg: `/images/projects/hero-${p.id}.jpg`,
+  gaImg: `/images/projects/ga-${p.id}.jpg`,
+  gbImg: `/images/projects/gb-${p.id}.jpg`,
 }));
 
 export function getProject(id: string): Project | undefined {

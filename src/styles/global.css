@@ -50,26 +50,19 @@ body {
 @media (prefers-reduced-motion: reduce) { .s9driftwm { animation: none !important; } }
 .s9giant { font-weight: 600; letter-spacing: -0.04em; color: var(--ochre-300, #E0C382); line-height: 0.8; user-select: none; -webkit-user-select: none; }
 
-/* ===== Image slot (upload component) ===== */
+/* ===== Site image (static asset container) ===== */
 .s9-image-slot { display: block !important; width: 100% !important; height: 100% !important; position: relative; overflow: hidden; }
 .s9-image-slot img { filter: contrast(1.05) saturate(1.08) brightness(1.01); width: 100%; height: 100%; object-fit: cover; display: block; }
-.s9upload-empty {
-  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-  border: 1px dashed var(--color-border-strong, #bfbfb5); background: var(--stone-100); color: var(--color-text-subtle);
-  cursor: pointer; text-align: center; padding: 16px; transition: border-color .2s ease, background .2s ease, color .2s ease;
+.s9img-missing {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  border: 1px dashed rgba(245,243,236,0.35); text-align: center; padding: 16px;
 }
-.s9upload-empty:hover, .s9upload-empty.drag { border-color: var(--forest-500); color: var(--forest-700); background: var(--forest-50, #f1f2ed); }
-.s9upload-empty .ic { font-size: 22px; opacity: 0.7; }
-.s9upload-empty .t1 { font-size: 12px; letter-spacing: 0.06em; font-weight: 500; }
-.s9upload-empty .t2 { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
-.s9upload-input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-.s9upload-actions { position: absolute; top: 10px; right: 10px; z-index: 3; display: flex; gap: 6px; }
-.s9upload-btn {
-  border: none; cursor: pointer; padding: 7px 12px; font-family: var(--font-display); font-size: 10px; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase; background: rgba(28,29,24,0.78); color: var(--stone-50);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.22); transition: background .2s ease, transform .2s ease;
+.s9img-missing .plate {
+  display: flex; flex-direction: column; gap: 6px; align-items: center;
+  background: rgba(28,29,24,0.72); backdrop-filter: blur(4px); padding: 12px 18px; max-width: 90%;
 }
-.s9upload-btn:hover { background: var(--forest-700); transform: translateY(-1px); }
+.s9img-missing span { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,243,236,0.85); }
+.s9img-missing code { font-size: 11px; font-family: var(--font-mono); color: var(--ochre-300, #E0C382); word-break: break-all; }
 
 /* ===== Cursor color-reveal: images read B&W, true colours bloom under the cursor ===== */
 @property --rr { syntax: '<length>'; inherits: true; initial-value: 0px; }
